@@ -1,0 +1,6 @@
+# Dependencies
+node_modules/
+.vercel/
+.env*
+*.log
+.DS_Store
