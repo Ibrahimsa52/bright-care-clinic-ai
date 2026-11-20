@@ -1,0 +1,11 @@
+{
+  "name": "bright-care-clinic-ai",
+  "version": "1.0.0",
+  "description": "Bright Care Medical Center AI Assistant Web Interface",
+  "scripts": {
+    "start": "node api/chat.js"
+  },
+  "dependencies": {
+    "vercel": "^66.6.0"
+  }
+}

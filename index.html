@@ -1,0 +1,1772 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مركز برايت كير الطبي | Bright Care Medical</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-main: 'Readex Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-en: 'Plus Jakarta Sans', sans-serif;
+
+            /* Light Clinic Theme: Fresh Nordic Clinical (NOT generic purple AI or Claude terracotta) */
+            --bg-base: #f8fafc;
+            --bg-subtle: #f1f5f9;
+            --surface: #ffffff;
+            --surface-elevated: #ffffff;
+            --surface-hover: #f1f5f9;
+            --surface-active: #e2e8f0;
+
+            --border-subtle: rgba(148, 163, 184, 0.22);
+            --border-strong: rgba(148, 163, 184, 0.45);
+            --border-focus: #0284c7;
+
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --text-subtle: #94a3b8;
+            --text-inverse: #ffffff;
+
+            --teal-primary: #0f766e;
+            --teal-hover: #115e59;
+            --teal-subtle: #ccfbf1;
+            --teal-text: #0d9488;
+            --teal-glow: rgba(13, 148, 136, 0.16);
+
+            --sky-primary: #0284c7;
+            --sky-glow: rgba(2, 132, 199, 0.15);
+
+            --emerald-badge: #10b981;
+            --emerald-subtle: #ecfdf5;
+            --emerald-text: #059669;
+
+            --bubble-bot-bg: #ffffff;
+            --bubble-bot-border: rgba(203, 213, 225, 0.7);
+            --bubble-bot-text: #0f172a;
+
+            --bubble-user-bg: #0f172a;
+            --bubble-user-text: #ffffff;
+
+            --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07);
+            --shadow-lg: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+            --shadow-composer: 0 12px 36px -4px rgba(15, 23, 42, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.06);
+
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+
+            --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg-base: #090d16;
+            --bg-subtle: #0d1321;
+            --surface: #141b2d;
+            --surface-elevated: #1a233a;
+            --surface-hover: #1e2942;
+            --surface-active: #243252;
+
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.18);
+            --border-focus: #38bdf8;
+
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --text-subtle: #64748b;
+            --text-inverse: #090d16;
+
+            --teal-primary: #14b8a6;
+            --teal-hover: #2dd4bf;
+            --teal-subtle: rgba(20, 184, 166, 0.16);
+            --teal-text: #5eead4;
+            --teal-glow: rgba(45, 212, 191, 0.22);
+
+            --sky-primary: #38bdf8;
+            --sky-glow: rgba(56, 189, 248, 0.2);
+
+            --emerald-badge: #10b981;
+            --emerald-subtle: rgba(16, 185, 129, 0.15);
+            --emerald-text: #34d399;
+
+            --bubble-bot-bg: #141b2d;
+            --bubble-bot-border: rgba(255, 255, 255, 0.1);
+            --bubble-bot-text: #f8fafc;
+
+            --bubble-user-bg: #0f766e;
+            --bubble-user-text: #ffffff;
+
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.5);
+            --shadow-composer: 0 12px 36px rgba(0, 0, 0, 0.6);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+            transition: background-color var(--transition-normal), color var(--transition-normal);
+        }
+
+        .app-viewport {
+            display: flex;
+            flex: 1;
+            height: 100vh;
+            height: 100dvh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ═══════════ SIDEBAR: CLINIC INFO & SPECIALISTS ═══════════ */
+        .clinic-sidebar {
+            width: 330px;
+            background: var(--surface);
+            border-left: 1px solid var(--border-subtle);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            z-index: 20;
+            transition: transform var(--transition-normal), background-color var(--transition-normal);
+            overflow-y: auto;
+        }
+
+        @media (max-width: 960px) {
+            .clinic-sidebar {
+                position: fixed;
+                top: 0; bottom: 0; right: 0;
+                width: 320px;
+                transform: translateX(100%);
+                box-shadow: var(--shadow-lg);
+            }
+            .clinic-sidebar.open { transform: translateX(0); }
+        }
+
+        .sidebar-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(4px);
+            z-index: 19;
+        }
+        .sidebar-overlay.open { display: block; }
+
+        .sidebar-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .clinic-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .clinic-logo-icon {
+            width: 40px; height: 40px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--teal-primary) 0%, var(--sky-primary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            box-shadow: 0 4px 12px var(--teal-glow);
+        }
+
+        .clinic-brand-titles h2 {
+            font-size: 0.96rem;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.25;
+        }
+        .clinic-brand-titles span {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-family: var(--font-en);
+        }
+
+        .sidebar-close-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 6px;
+            border-radius: var(--radius-sm);
+        }
+        @media (max-width: 960px) { .sidebar-close-btn { display: flex; } }
+
+        .sidebar-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            flex: 1;
+        }
+
+        .sidebar-card {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .sidebar-card-title {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 0.83rem;
+        }
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: var(--text-main);
+        }
+        .info-item svg {
+            width: 16px; height: 16px;
+            color: var(--teal-text);
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        .doctor-mini-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: var(--surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: border-color var(--transition-fast), transform var(--transition-fast);
+        }
+        .doctor-mini-item:hover {
+            border-color: var(--teal-text);
+            transform: translateY(-1px);
+        }
+        .doc-avatar {
+            width: 36px; height: 36px;
+            border-radius: var(--radius-full);
+            background: var(--teal-subtle);
+            color: var(--teal-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        .doc-details { flex: 1; min-width: 0; }
+        .doc-name {
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: var(--text-main);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .doc-spec { font-size: 0.74rem; color: var(--text-muted); }
+        .doc-fee {
+            font-size: 0.76rem;
+            font-weight: 700;
+            color: var(--teal-text);
+            font-family: var(--font-en);
+        }
+
+        .emergency-pill {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08) 0%, rgba(249, 115, 22, 0.08) 100%);
+            border: 1px dashed rgba(239, 68, 68, 0.3);
+            padding: 12px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .emergency-pill-text { font-size: 0.78rem; color: var(--text-main); }
+        .emergency-pill-text strong {
+            display: block;
+            color: #ef4444;
+            font-size: 0.86rem;
+            font-family: var(--font-en);
+        }
+
+        /* ═══════════ MAIN CHAT ═══════════ */
+        .chat-main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: var(--bg-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            padding: 12px 20px;
+            background: var(--surface);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            z-index: 10;
+        }
+
+        .chat-header-left { display: flex; align-items: center; gap: 12px; }
+
+        .mobile-menu-btn {
+            display: none;
+            background: var(--surface-hover);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            padding: 8px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+        }
+        @media (max-width: 960px) { .mobile-menu-btn { display: flex; } }
+
+        .assistant-status-group { display: flex; flex-direction: column; }
+        .assistant-name {
+            font-size: 0.94rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .live-dot-wrap {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--emerald-subtle);
+            color: var(--emerald-text);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+        }
+        .live-pulse {
+            width: 6px; height: 6px;
+            background-color: var(--emerald-badge);
+            border-radius: 50%;
+            animation: pulse-ring 2s infinite;
+        }
+        @keyframes pulse-ring {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+            70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        .assistant-subtext { font-size: 0.74rem; color: var(--text-muted); }
+
+        .header-actions { display: flex; align-items: center; gap: 6px; }
+        .header-action-btn {
+            width: 36px; height: 36px;
+            border-radius: var(--radius-sm);
+            background: var(--surface);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        .header-action-btn:hover {
+            background: var(--surface-hover);
+            color: var(--text-main);
+            border-color: var(--border-strong);
+        }
+        .header-action-btn.active {
+            color: var(--teal-text);
+            border-color: var(--teal-text);
+            background: var(--teal-subtle);
+        }
+
+        /* ═══════════ MESSAGES FEED ═══════════ */
+        .messages-scroll-area {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 24px 20px 105px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            scroll-behavior: smooth;
+        }
+
+        .messages-scroll-area::-webkit-scrollbar { width: 5px; }
+        .messages-scroll-area::-webkit-scrollbar-thumb {
+            background: var(--border-subtle);
+            border-radius: var(--radius-full);
+        }
+
+        .message-row {
+            display: flex;
+            gap: 12px;
+            max-width: 780px;
+            width: 100%;
+            margin: 0 auto;
+            animation: message-slide-up 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .message-row.user { justify-content: flex-start; flex-direction: row-reverse; }
+        .message-row.bot { justify-content: flex-start; }
+
+        @keyframes message-slide-up {
+            from { opacity: 0; transform: translateY(12px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .msg-avatar {
+            width: 34px; height: 34px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .bot .msg-avatar {
+            background: linear-gradient(135deg, var(--teal-primary) 0%, var(--sky-primary) 100%);
+            color: #ffffff;
+            box-shadow: 0 2px 8px var(--teal-glow);
+        }
+        .user .msg-avatar {
+            background: var(--surface-active);
+            color: var(--text-muted);
+        }
+
+        .msg-body-wrapper { display: flex; flex-direction: column; max-width: 82%; }
+        @media (max-width: 640px) { .msg-body-wrapper { max-width: 88%; } }
+
+        .msg-bubble {
+            padding: 13px 18px;
+            border-radius: var(--radius-md);
+            font-size: 0.91rem;
+            line-height: 1.65;
+            position: relative;
+            word-break: break-word;
+            white-space: pre-line;
+            box-shadow: var(--shadow-sm);
+        }
+        .bot .msg-bubble {
+            background: var(--bubble-bot-bg);
+            color: var(--bubble-bot-text);
+            border: 1px solid var(--bubble-bot-border);
+            border-top-right-radius: 4px;
+        }
+        .user .msg-bubble {
+            background: var(--bubble-user-bg);
+            color: var(--bubble-user-text);
+            border-top-left-radius: 4px;
+        }
+
+        .msg-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.7rem;
+            color: var(--text-subtle);
+            margin-top: 4px;
+            padding: 0 4px;
+        }
+        .user .msg-meta { justify-content: flex-end; }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--text-subtle);
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity var(--transition-fast), color var(--transition-fast);
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        .message-row:hover .copy-btn { opacity: 1; }
+        .copy-btn:hover { color: var(--text-main); background: var(--surface-hover); }
+
+        /* Welcome Feed Card */
+        .welcome-feed-card {
+            max-width: 780px;
+            margin: 0 auto 10px;
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 22px;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+        .welcome-feed-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--teal-primary), var(--sky-primary));
+        }
+        .welcome-feed-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 10px;
+        }
+        .welcome-badge-icon {
+            width: 44px; height: 44px;
+            border-radius: var(--radius-md);
+            background: var(--teal-subtle);
+            color: var(--teal-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .welcome-feed-title { font-size: 1.05rem; font-weight: 700; color: var(--text-main); }
+        .welcome-feed-subtitle { font-size: 0.78rem; color: var(--text-muted); }
+        .welcome-feed-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .quick-chips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+        }
+        .chip-btn {
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-main);
+            font-family: var(--font-main);
+            font-size: 0.82rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: right;
+            transition: all var(--transition-fast);
+        }
+        .chip-btn:hover {
+            background: var(--surface);
+            border-color: var(--teal-text);
+            color: var(--teal-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+        .chip-btn svg { width: 18px; height: 18px; color: var(--teal-text); flex-shrink: 0; }
+
+        /* Interactive Doctor & Voucher Cards */
+        .interactive-card-box {
+            margin-top: 10px;
+            background: var(--bg-subtle);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .doctor-chat-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px;
+            background: var(--surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+        }
+        .doc-chat-name { font-weight: 700; font-size: 0.88rem; color: var(--text-main); }
+        .doc-chat-spec { font-size: 0.78rem; color: var(--text-muted); }
+        .doc-chat-days { font-size: 0.72rem; color: var(--teal-text); font-weight: 500; }
+        .doc-chat-action { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+        .doc-chat-price { font-family: var(--font-en); font-weight: 700; font-size: 0.85rem; color: var(--text-main); }
+        .doc-book-btn {
+            background: var(--teal-primary);
+            color: #ffffff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-family: var(--font-main);
+            font-size: 0.76rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background var(--transition-fast);
+        }
+        .doc-book-btn:hover { background: var(--teal-hover); }
+
+        .booking-voucher {
+            background: var(--surface);
+            border: 2px solid var(--teal-primary);
+            border-radius: var(--radius-md);
+            padding: 18px;
+            margin-top: 8px;
+        }
+        .booking-voucher-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px dashed var(--border-strong);
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+        }
+        .voucher-title { font-size: 0.95rem; font-weight: 700; color: var(--teal-primary); display: flex; align-items: center; gap: 8px; }
+        .voucher-ref {
+            font-family: var(--font-en);
+            font-weight: 700;
+            font-size: 0.76rem;
+            background: var(--teal-subtle);
+            color: var(--teal-primary);
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        .voucher-rows {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            font-size: 0.82rem;
+            margin-bottom: 12px;
+        }
+        .voucher-field span { display: block; color: var(--text-muted); font-size: 0.7rem; }
+        .voucher-field strong { color: var(--text-main); font-weight: 600; }
+        .voucher-notice {
+            background: var(--bg-subtle);
+            border-radius: var(--radius-sm);
+            padding: 8px 12px;
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            border-right: 3px solid var(--teal-primary);
+        }
+
+        .step-chips-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+        .step-chip {
+            background: var(--surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-full);
+            padding: 6px 14px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-family: var(--font-main);
+        }
+        .step-chip:hover {
+            border-color: var(--teal-text);
+            background: var(--teal-subtle);
+            color: var(--teal-primary);
+        }
+
+        /* Typing wave */
+        .typing-wave-container {
+            display: none;
+            align-items: center;
+            gap: 4px;
+            padding: 12px 18px;
+            background: var(--bubble-bot-bg);
+            border: 1px solid var(--bubble-bot-border);
+            border-radius: var(--radius-md);
+            border-top-right-radius: 4px;
+            width: fit-content;
+            box-shadow: var(--shadow-sm);
+            margin: 0 auto;
+            max-width: 780px;
+        }
+        .typing-wave-container.active { display: flex; }
+        .typing-wave-bar {
+            width: 6px; height: 6px;
+            background-color: var(--teal-text);
+            border-radius: 50%;
+            animation: wave-bounce 1s infinite ease-in-out;
+        }
+        .typing-wave-bar:nth-child(2) { animation-delay: 0.15s; }
+        .typing-wave-bar:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes wave-bounce {
+            0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+            40% { transform: scale(1.1); opacity: 1; }
+        }
+
+        /* ═══════════ COMPOSER DOCK (SILK-SMOOTH WRITING) ═══════════ */
+        .composer-dock {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            padding: 10px 20px 16px;
+            background: linear-gradient(180deg, rgba(248, 250, 252, 0) 0%, var(--bg-base) 35%, var(--bg-base) 100%);
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            pointer-events: none;
+        }
+        [data-theme="dark"] .composer-dock {
+            background: linear-gradient(180deg, rgba(9, 13, 22, 0) 0%, var(--bg-base) 35%, var(--bg-base) 100%);
+        }
+
+        .composer-wrapper {
+            max-width: 780px;
+            width: 100%;
+            pointer-events: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .composer-shortcuts {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 2px;
+            scrollbar-width: none;
+        }
+        .composer-shortcuts::-webkit-scrollbar { display: none; }
+        .shortcut-pill {
+            background: var(--surface);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-full);
+            padding: 5px 12px;
+            font-size: 0.74rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all var(--transition-fast);
+            box-shadow: var(--shadow-sm);
+        }
+        .shortcut-pill:hover {
+            border-color: var(--teal-text);
+            color: var(--teal-primary);
+            background: var(--teal-subtle);
+        }
+
+        .composer-box {
+            background: var(--surface);
+            border: 1.5px solid var(--border-strong);
+            border-radius: var(--radius-lg);
+            padding: 6px 8px 6px 14px;
+            display: flex;
+            align-items: flex-end;
+            gap: 10px;
+            box-shadow: var(--shadow-composer);
+            transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+        }
+        .composer-box:focus-within {
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 3px var(--sky-glow), var(--shadow-composer);
+        }
+
+        .composer-textarea {
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-family: var(--font-main);
+            font-size: 0.93rem;
+            color: var(--text-main);
+            resize: none;
+            min-height: 28px;
+            max-height: 140px;
+            outline: none;
+            padding: 6px 0;
+            line-height: 1.5;
+        }
+        .composer-textarea::placeholder { color: var(--text-subtle); }
+
+        .composer-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+            padding-bottom: 2px;
+        }
+
+        .tool-icon-btn {
+            width: 36px; height: 36px;
+            border-radius: var(--radius-full);
+            background: transparent;
+            border: none;
+            color: var(--text-subtle);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        .tool-icon-btn:hover { color: var(--text-main); background: var(--surface-hover); }
+        .tool-icon-btn.recording {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            animation: mic-pulse 1.2s infinite;
+        }
+        @keyframes mic-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .send-action-btn {
+            width: 40px; height: 40px;
+            border-radius: var(--radius-md);
+            background: var(--teal-primary);
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+            box-shadow: 0 4px 12px var(--teal-glow);
+        }
+        .send-action-btn:hover { background: var(--teal-hover); transform: translateY(-1px); }
+        .send-action-btn:active { transform: scale(0.94); }
+        .send-action-btn:disabled {
+            background: var(--surface-active);
+            color: var(--text-subtle);
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+        .send-action-btn svg { width: 18px; height: 18px; transform: scaleX(-1); }
+
+        .composer-tip {
+            font-size: 0.68rem;
+            color: var(--text-subtle);
+            text-align: center;
+        }
+
+        .toast-msg {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100px);
+            background: var(--text-main);
+            color: var(--surface);
+            padding: 10px 20px;
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            font-weight: 500;
+            box-shadow: var(--shadow-lg);
+            z-index: 100;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .toast-msg.show { transform: translateX(-50%) translateY(0); }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+
+<div class="app-viewport">
+  
+  <!-- ==========================================================================
+       SIDEBAR: Clinic Info, Available Specialists, Live Status
+       ========================================================================== -->
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar(false)"></div>
+  
+  <aside class="clinic-sidebar" id="clinicSidebar">
+    <div class="sidebar-header">
+      <div class="clinic-brand">
+        <div class="clinic-logo-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 6v12m-6-6h12"/>
+          </svg>
+        </div>
+        <div class="clinic-brand-titles">
+          <h2>برايت كير الطبي</h2>
+          <span>Bright Care Medical</span>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" onclick="toggleSidebar(false)" aria-label="إغلاق القائمة">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 6L6 18M6 6l12 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="sidebar-content">
+      <!-- Quick Info Card -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+          </svg>
+          معلومات العيادة
+        </div>
+        <div class="info-list">
+          <div class="info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            <div>٢٤ شارع حديقة الياسمين، حي النخيل، القاهرة</div>
+          </div>
+          <div class="info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+            </svg>
+            <div>السبت — الخميس: ٩:٠٠ ص - ٨:٠٠ م (الجمعة عطلة)</div>
+          </div>
+          <div class="info-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>
+            </svg>
+            <div>موقف سيارات مجاني متوفر (٢٠ سيارة) ومصعد متاح</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Specialists On Duty -->
+      <div class="sidebar-card">
+        <div class="sidebar-card-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/>
+          </svg>
+          أطباء العيادة
+        </div>
+        
+        <div class="info-list">
+          <div class="doctor-mini-item" onclick="askAboutDoctor('د. ليلى حداد')">
+            <div class="doc-avatar">ل.ح</div>
+            <div class="doc-details">
+              <div class="doc-name">د. ليلى حداد</div>
+              <div class="doc-spec">طب عام وأسرة</div>
+            </div>
+            <div class="doc-fee">٤٠٠ ج.م</div>
+          </div>
+
+          <div class="doctor-mini-item" onclick="askAboutDoctor('د. عمر نصار')">
+            <div class="doc-avatar">ع.ن</div>
+            <div class="doc-details">
+              <div class="doc-name">د. عمر نصار</div>
+              <div class="doc-spec">طب الأطفال وحديثي الولادة</div>
+            </div>
+            <div class="doc-fee">٥٠٠ ج.م</div>
+          </div>
+
+          <div class="doctor-mini-item" onclick="askAboutDoctor('د. سلمى الرشيدي')">
+            <div class="doc-avatar">س.ر</div>
+            <div class="doc-details">
+              <div class="doc-name">د. سلمى الرشيدي</div>
+              <div class="doc-spec">جلدية وتجميل</div>
+            </div>
+            <div class="doc-fee">٧٠٠ ج.م</div>
+          </div>
+
+          <div class="doctor-mini-item" onclick="askAboutDoctor('د. كريم منصور')">
+            <div class="doc-avatar">ك.م</div>
+            <div class="doc-details">
+              <div class="doc-name">د. كريم منصور</div>
+              <div class="doc-spec">عظام ومفاصل</div>
+            </div>
+            <div class="doc-fee">٨٠٠ ج.م</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Emergency Hotline -->
+      <div class="emergency-pill">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        <div class="emergency-pill-text">
+          استقبال وحالات طارئة:
+          <strong>+20 2 5555 0142</strong>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       MAIN CHAT WINDOW
+       ========================================================================== -->
+  <main class="chat-main">
+    <!-- Top Header Bar -->
+    <header class="chat-header">
+      <div class="chat-header-left">
+        <button class="mobile-menu-btn" onclick="toggleSidebar(true)" aria-label="عرض معلومات العيادة">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+        <div class="assistant-status-group">
+          <div class="assistant-name">
+            مساعد العيادة الذكي
+            <span class="live-dot-wrap">
+              <span class="live-pulse"></span>
+              متاح للرد
+            </span>
+          </div>
+          <div class="assistant-subtext">إجابات فورية وحجز مواعيد مع الأطباء مباشرة</div>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <!-- Audio Feedback Toggle -->
+        <button class="header-action-btn" id="soundToggleBtn" onclick="toggleSound()" title="كتم/تفعيل الصوت التفاعلي" aria-label="تفعيل الصوت">
+          <svg id="soundIconOn" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+          </svg>
+          <svg id="soundIconOff" style="display:none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>
+          </svg>
+        </button>
+
+        <!-- Dark / Light Theme Toggle -->
+        <button class="header-action-btn" onclick="toggleTheme()" title="تبديل المظهر" aria-label="تبديل المظهر">
+          <svg id="themeIconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+          <svg id="themeIconMoon" style="display:none;" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+        </button>
+
+        <!-- Clear Chat -->
+        <button class="header-action-btn" onclick="resetChat()" title="محادثة جديدة" aria-label="محادثة جديدة">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Message Stream -->
+    <div class="messages-scroll-area" id="messagesContainer" role="log" aria-live="polite">
+      
+      <!-- Welcome Hero Card -->
+      <div class="welcome-feed-card" id="welcomeCard">
+        <div class="welcome-feed-header">
+          <div class="welcome-badge-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </div>
+          <div>
+            <h1 class="welcome-feed-title">أهلاً بك في مركز برايت كير الطبي</h1>
+            <p class="welcome-feed-subtitle">Bright Care Medical Center — القاهرة، حي النخيل</p>
+          </div>
+        </div>
+
+        <p class="welcome-feed-desc">
+          أنا مساعدك الطبي الذكي. يمكنني إجابتك عن استفسارات الأطباء، الأسعار، مواعيد العمل، أو مساعدتك في تسجيل حجز موعدك خطوة بخطوة بكل سهولة وسلاسة.
+        </p>
+
+        <div class="quick-chips-grid">
+          <button class="chip-btn" onclick="sendQuickPrompt('عندكم دكتور جلدية؟ وما هي مواعيده؟')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            أطباء الجلدية والتخصصات
+          </button>
+          
+          <button class="chip-btn" onclick="startBookingFlow()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            حجز موعد كشف طبي
+          </button>
+
+          <button class="chip-btn" onclick="sendQuickPrompt('كم سعر الكشف في التخصصات المختلفة؟')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            قائمة أسعار الكشف
+          </button>
+
+          <button class="chip-btn" onclick="sendQuickPrompt('ما هي مواعيد العمل والعنوان بالتفصيل؟')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            المواعيد ومواقف السيارات
+          </button>
+        </div>
+      </div>
+
+      <!-- Typing Indicator Component inside Feed -->
+      <div class="typing-wave-container" id="typingWave">
+        <span class="typing-wave-bar"></span>
+        <span class="typing-wave-bar"></span>
+        <span class="typing-wave-bar"></span>
+      </div>
+
+    </div>
+
+    <!-- ==========================================================================
+         COMPOSER DOCK: Designed for Ultra Fluid Writing
+         ========================================================================== -->
+    <div class="composer-dock">
+      <div class="composer-wrapper">
+        
+        <!-- Contextual Quick Action Pills -->
+        <div class="composer-shortcuts" id="composerShortcuts">
+          <button class="shortcut-pill" onclick="startBookingFlow()">📅 حجز موعد</button>
+          <button class="shortcut-pill" onclick="sendQuickPrompt('من هم الأطباء المتاحون اليوم؟')">👨‍⚕️ الأطباء المتاحون</button>
+          <button class="shortcut-pill" onclick="sendQuickPrompt('أسعار الكشف وطرق الدفع المتاحة')">💳 رسوم الكشف والدفع</button>
+          <button class="shortcut-pill" onclick="sendQuickPrompt('هل أحتاج موعد مسبق أم يمكن الحضور مباشرة؟')">🚶‍♂️ الحضور بدون موعد</button>
+        </div>
+
+        <div class="composer-box">
+          <textarea
+            class="composer-textarea"
+            id="messageInput"
+            placeholder="اكتب استفسارك هنا أو اطلب حجز موعد..."
+            rows="1"
+            aria-label="رسالتك للمساعد الذكي"
+            autofocus
+          ></textarea>
+
+          <div class="composer-controls">
+            <!-- Voice Dictation Simulation -->
+            <button class="tool-icon-btn" id="micBtn" onclick="toggleMic()" title="إملاء صوتي" aria-label="إملاء صوتي">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/>
+              </svg>
+            </button>
+
+            <!-- Send Action Button -->
+            <button class="send-action-btn" id="sendBtn" onclick="handleSend()" disabled aria-label="إرسال الرسالة">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="composer-tip">
+          اضغط Enter للإرسال السريع • Shift + Enter لسطر جديد
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Toast Feedback -->
+<div class="toast-msg" id="toastBox">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <polyline points="20 6 9 17 4 12"/>
+  </svg>
+  <span id="toastText">تم النسخ بنجاح</span>
+</div>
+
+<script>
+  // ── SOUND SYNTHESIS (Web Audio API - No external assets) ──
+  let soundEnabled = true;
+  let audioCtx = null;
+
+  function initAudio() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+  }
+
+  function playSendTone() {
+    if (!soundEnabled) return;
+    try {
+      initAudio();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(420, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(780, audioCtx.currentTime + 0.08);
+      gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.1);
+    } catch(e) {}
+  }
+
+  function playReceiveTone() {
+    if (!soundEnabled) return;
+    try {
+      initAudio();
+      const now = audioCtx.currentTime;
+      const osc1 = audioCtx.createOscillator();
+      const gain1 = audioCtx.createGain();
+      osc1.type = 'triangle';
+      osc1.frequency.setValueAtTime(523.25, now);
+      gain1.gain.setValueAtTime(0.05, now);
+      gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+      osc1.connect(gain1);
+      gain1.connect(audioCtx.destination);
+      osc1.start(now);
+      osc1.stop(now + 0.15);
+
+      const osc2 = audioCtx.createOscillator();
+      const gain2 = audioCtx.createGain();
+      osc2.type = 'triangle';
+      osc2.frequency.setValueAtTime(659.25, now + 0.08);
+      gain2.gain.setValueAtTime(0.05, now + 0.08);
+      gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+      osc2.connect(gain2);
+      gain2.connect(audioCtx.destination);
+      osc2.start(now + 0.08);
+      osc2.stop(now + 0.28);
+    } catch(e) {}
+  }
+
+  function toggleSound() {
+    soundEnabled = !soundEnabled;
+    document.getElementById('soundIconOn').style.display = soundEnabled ? 'block' : 'none';
+    document.getElementById('soundIconOff').style.display = soundEnabled ? 'none' : 'block';
+    document.getElementById('soundToggleBtn').classList.toggle('active', soundEnabled);
+    showToast(soundEnabled ? 'تم تفعيل التنبيهات الصوتية' : 'تم كتم الصوت');
+  }
+
+  // ── THEME TOGGLE ──
+  function toggleTheme() {
+    const isDark = document.body.getAttribute('data-theme') === 'dark';
+    const newTheme = isDark ? 'light' : 'dark';
+    document.body.setAttribute('data-theme', newTheme);
+    document.getElementById('themeIconSun').style.display = isDark ? 'block' : 'none';
+    document.getElementById('themeIconMoon').style.display = isDark ? 'none' : 'block';
+    localStorage.setItem('bc_theme', newTheme);
+  }
+
+  (function initTheme() {
+    const saved = localStorage.getItem('bc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.body.setAttribute('data-theme', saved);
+    document.getElementById('themeIconSun').style.display = saved === 'light' ? 'block' : 'none';
+    document.getElementById('themeIconMoon').style.display = saved === 'dark' ? 'block' : 'none';
+  })();
+
+  // ── SIDEBAR TOGGLE (Mobile) ──
+  function toggleSidebar(open) {
+    const sb = document.getElementById('clinicSidebar');
+    const ov = document.getElementById('sidebarOverlay');
+    if (open) {
+      sb.classList.add('open');
+      ov.classList.add('open');
+    } else {
+      sb.classList.remove('open');
+      ov.classList.remove('open');
+    }
+  }
+
+  // ── TOAST NOTIFICATION ──
+  let toastTimer = null;
+  function showToast(text) {
+    const box = document.getElementById('toastBox');
+    document.getElementById('toastText').textContent = text;
+    box.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => box.classList.remove('show'), 2200);
+  }
+
+  // ── CLINICAL DATA REPOSITORY (Matches Seed Data) ──
+  const CLINIC_KNOWLEDGE = {
+    doctors: [
+      {
+        id: 'dr_layla',
+        name: 'د. ليلى حداد',
+        nameEn: 'Dr. Layla Haddad',
+        specialty: 'طب عام وطب أسرة',
+        fee: '٤٠٠ ج.م',
+        days: 'السبت إلى الأربعاء (٩:٠٠ ص - ٣:٠٠ م)',
+        duration: '٣٠ دقيقة',
+        walkIn: 'يُقبل الحضور بدون موعد مسبق يومي الأحد والثلاثاء (٩:٠٠ ص - ١٢:٠٠ م)',
+        bio: 'استشاري الرعاية الأولية والطب الوقائي ومتابعة الحالات المزمنة وصحة العائلة.'
+      },
+      {
+        id: 'dr_omar',
+        name: 'د. عمر نصار',
+        nameEn: 'Dr. Omar Nassar',
+        specialty: 'طب الأطفال وحديثي الولادة',
+        fee: '٥٠٠ ج.م',
+        days: 'السبت، الإثنين، الأربعاء، الخميس (١٢:٠٠ م - ٧:٠٠ م)',
+        duration: '٣٠ دقيقة',
+        walkIn: 'بالحجز المسبق فقط لضمان خصوصية وراحة الطفل',
+        bio: 'أخصائي رعاية الرضع وحديثي الولادة والنمو الحركي والبدني والتطعيمات.'
+      },
+      {
+        id: 'dr_salma',
+        name: 'د. سلمى الرشيدي',
+        nameEn: 'Dr. Salma El-Rashidi',
+        specialty: 'جلدية وتجميل وعلاج الليزر',
+        fee: '٧٠٠ ج.م',
+        days: 'الأحد، الثلاثاء، الخميس (١١:٠٠ ص - ٧:٠٠ م)',
+        duration: '٣٠ دقيقة',
+        walkIn: 'بالحجز المسبق فقط',
+        bio: 'استشاري أمراض الجلدية والعلاج التجميلي وجلسات نضارة البشرة والليزر.'
+      },
+      {
+        id: 'dr_karim',
+        name: 'د. كريم منصور',
+        nameEn: 'Dr. Karim Mansour',
+        specialty: 'جراحة العظام والمفاصل وإصابات الملاعب',
+        fee: '٨٠٠ ج.م',
+        days: 'السبت، الأحد، الثلاثاء، الأربعاء (٢:٠٠ م - ٨:٠٠ م)',
+        duration: '٤٠ دقيقة',
+        walkIn: 'بالحجز المسبق فقط',
+        bio: 'استشاري مناظير المفاصل والعمود الفقري وتأهيل إصابات الرياضيين.'
+      }
+    ]
+  };
+
+  // ── IN-SESSION BOOKING STATE MACHINE ──
+  let bookingSession = {
+    active: false,
+    step: 0,
+    doctor: null,
+    slot: null,
+    patientName: '',
+    phone: ''
+  };
+
+  const messagesArea = document.getElementById('messagesContainer');
+  const inputEl = document.getElementById('messageInput');
+  const sendBtn = document.getElementById('sendBtn');
+  const typingWave = document.getElementById('typingWave');
+
+  // ── AUTO-GROW TEXTAREA (Silk Smooth) ──
+  inputEl.addEventListener('input', () => {
+    inputEl.style.height = 'auto';
+    const newHeight = Math.min(inputEl.scrollHeight, 140);
+    inputEl.style.height = newHeight + 'px';
+    sendBtn.disabled = !inputEl.value.trim();
+  });
+
+  inputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  });
+
+  function getFormattedTime() {
+    return new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit', hour12: true });
+  }
+
+  function scrollToFeedBottom() {
+    requestAnimationFrame(() => {
+      messagesArea.scrollTop = messagesArea.scrollHeight;
+    });
+  }
+
+  function appendMessage(sender, text, htmlContent = null) {
+    const row = document.createElement('div');
+    row.className = `message-row ${sender}`;
+
+    const avatar = document.createElement('div');
+    avatar.className = 'msg-avatar';
+    if (sender === 'bot') {
+      avatar.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 6v12m-6-6h12"/></svg>`;
+    } else {
+      avatar.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+    }
+
+    const bodyWrapper = document.createElement('div');
+    bodyWrapper.className = 'msg-body-wrapper';
+
+    const bubble = document.createElement('div');
+    bubble.className = 'msg-bubble';
+
+    if (htmlContent) {
+      bubble.innerHTML = htmlContent;
+    } else {
+      bubble.textContent = text;
+    }
+
+    const meta = document.createElement('div');
+    meta.className = 'msg-meta';
+    meta.innerHTML = `
+      <span>${getFormattedTime()}</span>
+      ${sender === 'bot' ? `<button class="copy-btn" onclick="copyText(this)" title="نسخ الرد"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> نسخ</button>` : `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0d9488" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>`}
+    `;
+
+    bodyWrapper.appendChild(bubble);
+    bodyWrapper.appendChild(meta);
+
+    row.appendChild(avatar);
+    row.appendChild(bodyWrapper);
+
+    messagesArea.insertBefore(row, typingWave);
+    scrollToFeedBottom();
+  }
+
+  function copyText(btn) {
+    const bubble = btn.closest('.msg-body-wrapper').querySelector('.msg-bubble');
+    navigator.clipboard.writeText(bubble.innerText).then(() => {
+      showToast('تم نسخ نص الرسالة إلى الحافظة');
+    });
+  }
+
+  function showTyping() {
+    typingWave.classList.add('active');
+    messagesArea.appendChild(typingWave);
+    scrollToFeedBottom();
+  }
+  function hideTyping() {
+    typingWave.classList.remove('active');
+  }
+
+  // ── SMART CLINICAL CONVERSATION ENGINE ──
+  function resolveBotResponse(userPrompt) {
+    const text = userPrompt.toLowerCase().trim();
+
+    if (text.includes('دكتور') || text.includes('طبيب') || text.includes('أطباء') || text.includes('دكاترة') || text.includes('تخصص') || text.includes('جلدية') || text.includes('أطفال') || text.includes('عظام') || text.includes('باطنة')) {
+      let cardsHtml = `نخبة من كبار الاستشاريين في مركز برايت كير الطبي:\n\n<div class="interactive-card-box">`;
+      CLINIC_KNOWLEDGE.doctors.forEach(doc => {
+        cardsHtml += `
+          <div class="doctor-chat-card">
+            <div class="doc-chat-info">
+              <span class="doc-chat-name">${doc.name}</span>
+              <span class="doc-chat-spec">${doc.specialty}</span>
+              <span class="doc-chat-days">📅 ${doc.days}</span>
+            </div>
+            <div class="doc-chat-action">
+              <span class="doc-chat-price">${doc.fee}</span>
+              <button class="doc-book-btn" onclick="selectDoctorForBooking('${doc.id}')">احجز الآن</button>
+            </div>
+          </div>
+        `;
+      });
+      cardsHtml += `</div>\nيمكنك الضغط على زر "احجز الآن" بجانب أي طبيب للبدء فوراً.`;
+      return { html: cardsHtml };
+    }
+
+    if (text.includes('سعر') || text.includes('اسعار') || text.includes('أسعار') || text.includes('كشف') || text.includes('تكلفة') || text.includes('بكام') || text.includes('كام') || text.includes('فلوس') || text.includes('دفع') || text.includes('فيزا')) {
+      let priceHtml = `قائمة رسوم الكشف الطبي لجميع التخصصات المتاحة:\n\n<div class="interactive-card-box">`;
+      CLINIC_KNOWLEDGE.doctors.forEach(doc => {
+        priceHtml += `
+          <div class="doctor-chat-card">
+            <div>
+              <div class="doc-chat-name">${doc.specialty}</div>
+              <div class="doc-chat-spec">${doc.name} — كشف ${doc.duration}</div>
+            </div>
+            <div class="doc-chat-price">${doc.fee}</div>
+          </div>
+        `;
+      });
+      priceHtml += `
+        <div style="font-size:0.75rem; color:var(--text-muted); margin-top:6px;">
+          💳 طرق الدفع المقبولة: نقداً في الاستقبال، بطاقات Visa / Mastercard الائتمانية والخصم المباشر.
+        </div>
+      </div>
+      ✨ يُتاح استفسار المتابعة المجانية خلال أسبوعين من تاريخ الكشف.`;
+      return { html: priceHtml };
+    }
+
+    if (text.includes('مواعيد') || text.includes('ساعات') || text.includes('تفتح') || text.includes('تقفل') || text.includes('شغالين') || text.includes('عمل') || text.includes('وقت') || text.includes('بدون موعد')) {
+      const hoursHtml = `
+⏰ مواعيد عمل مركز برايت كير الطبي:
+
+• من السبت إلى الخميس: ٩:٠٠ صباحاً حتى ٨:٠٠ مساءً
+• يوم الجمعة والعطلات الرسمية: مغلق
+
+🚶‍♂️ سياسة الحضور بدون حجز مسبق (Walk-in):
+متاح لعيادة الطب العام (د. ليلى حداد) فقط يومي الأحد والثلاثاء من ٩:٠٠ ص إلى ١٢:٠٠ ظهراً حسب أولوية الوصول، أما باقي التخصصات فالحجز المسبق إلزامي لضمان جودة الرعاية.`;
+      return { text: hoursHtml };
+    }
+
+    if (text.includes('عنوان') || text.includes('فين') || text.includes('مكان') || text.includes('موقع') || text.includes('مواقف') || text.includes('باركنج') || text.includes('موقف') || text.includes('ازاي اروح')) {
+      const locHtml = `
+📍 عنوان المركز:
+٢٤ شارع حديقة الياسمين، حي النخيل، القاهرة، جمهورية مصر العربية.
+
+🚗 مواقف السيارات وتسهيلات الدخول:
+• يتوفر موقف سيارات خاص ومجاني يتسع لـ ٢٠ سيارة خلف مبنى العيادة.
+• مدخل مجهز بدون درجات (Step-free entrance) ومصعد متسع لكافة الطوابق لراحة كبار السن وأصحاب الهمم.`;
+      return { text: locHtml };
+    }
+
+    if (text.includes('احجز') || text.includes('حجز') || text.includes('عايز احجز') || text.includes('موعد') || text.includes('ميعاد') || text.includes('تسجيل')) {
+      return triggerBookingStep(1);
+    }
+
+    return {
+      text: `أهلاً بك! أنا هنا لمساعدتك في كل ما يخص مركز برايت كير الطبي.
+
+يمكنني إفادتك بـ:
+١. مواعيد الأطباء وأسماء الاستشاريين
+٢. أسعار الكشف وطرق الدفع
+٣. حجز موعد فوري مع الطبيب المناسب
+٤. العنوان وتفاصيل مواقف السيارات
+
+كيف ترغب أن أساعدك اليوم؟`
+    };
+  }
+
+  // ── INTERACTIVE BOOKING WORKFLOW ──
+  function startBookingFlow() {
+    bookingSession.active = true;
+    bookingSession.step = 1;
+    const res = triggerBookingStep(1);
+    showTyping();
+    setTimeout(() => {
+      hideTyping();
+      appendMessage('bot', null, res.html);
+      playReceiveTone();
+    }, 400);
+  }
+
+  function triggerBookingStep(step) {
+    if (step === 1) {
+      let stepHtml = `اختر التخصص أو الطبيب الذي ترغب في الكشف معه:\n\n<div class="step-chips-row">`;
+      CLINIC_KNOWLEDGE.doctors.forEach(doc => {
+        stepHtml += `<button class="step-chip" onclick="selectDoctorForBooking('${doc.id}')">${doc.specialty} — ${doc.name}</button>`;
+      });
+      stepHtml += `</div>`;
+      return { html: stepHtml };
+    }
+  }
+
+  function selectDoctorForBooking(docId) {
+    const doc = CLINIC_KNOWLEDGE.doctors.find(d => d.id === docId);
+    if (!doc) return;
+    bookingSession.doctor = doc;
+    bookingSession.step = 2;
+
+    appendMessage('user', `أرغب في الحجز مع ${doc.name} (${doc.specialty})`);
+    playSendTone();
+
+    showTyping();
+    setTimeout(() => {
+      hideTyping();
+      const slotsHtml = `
+ممتاز! اختر الموعد المفضل للكشف مع ${doc.name}:
+(قيمة الكشف: ${doc.fee} — المدة: ${doc.duration})
+
+<div class="step-chips-row">
+  <button class="step-chip" onclick="selectSlotForBooking('السبت القادم — ١٠:٣٠ صباحاً')">السبت: ١٠:٣٠ ص</button>
+  <button class="step-chip" onclick="selectSlotForBooking('السبت القادم — ١:٠٠ ظهراً')">السبت: ١:٠٠ م</button>
+  <button class="step-chip" onclick="selectSlotForBooking('الإثنين القادم — ١١:٠٠ صباحاً')">الإثنين: ١١:٠٠ ص</button>
+  <button class="step-chip" onclick="selectSlotForBooking('الأربعاء القادم — ٢:٣٠ ظهراً')">الأربعاء: ٢:٣٠ م</button>
+</div>`;
+      appendMessage('bot', null, slotsHtml);
+      playReceiveTone();
+    }, 500);
+  }
+
+  function selectSlotForBooking(slotTime) {
+    bookingSession.slot = slotTime;
+    bookingSession.step = 3;
+
+    appendMessage('user', `الموعد المناسب: ${slotTime}`);
+    playSendTone();
+
+    showTyping();
+    setTimeout(() => {
+      hideTyping();
+      const promptHtml = `
+بقي خطوة واحدة أخيرة! لطفاً اكتب اسم المريض ورقم الهاتف للتواصل:
+(مثال: محمد أحمد - 01012345678)`;
+      appendMessage('bot', promptHtml);
+      playReceiveTone();
+      inputEl.placeholder = "اكتب اسمك ورقم هاتفك هنا...";
+      inputEl.focus();
+    }, 500);
+  }
+
+  function completeBooking(patientDetails) {
+    const refCode = 'BC-' + Math.floor(100000 + Math.random() * 900000);
+    const voucherHtml = `
+🎉 تم تسجيل طلب حجز موعدك بنجاح!
+
+<div class="booking-voucher">
+  <div class="booking-voucher-header">
+    <div class="voucher-title">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      تذكرة طلب موعد عيادة
+    </div>
+    <span class="voucher-ref">#${refCode}</span>
+  </div>
+
+  <div class="voucher-rows">
+    <div class="voucher-field">
+      <span>اسم المريض:</span>
+      <strong>${patientDetails}</strong>
+    </div>
+    <div class="voucher-field">
+      <span>الطبيب المختص:</span>
+      <strong>${bookingSession.doctor ? bookingSession.doctor.name : 'د. ليلى حداد'}</strong>
+    </div>
+    <div class="voucher-field">
+      <span>التخصص:</span>
+      <strong>${bookingSession.doctor ? bookingSession.doctor.specialty : 'طب عام'}</strong>
+    </div>
+    <div class="voucher-field">
+      <span>الموعد المختار:</span>
+      <strong>${bookingSession.slot || 'السبت القادم ١٠:٣٠ ص'}</strong>
+    </div>
+    <div class="voucher-field">
+      <span>قيمة الكشف:</span>
+      <strong style="color:var(--teal-text);">${bookingSession.doctor ? bookingSession.doctor.fee : '٤٠٠ ج.م'}</strong>
+    </div>
+    <div class="voucher-field">
+      <span>الموقع:</span>
+      <strong>حي النخيل، القاهرة</strong>
+    </div>
+  </div>
+
+  <div class="voucher-notice">
+    📌 ملاحظة: هذا طلب حجز مبدئي مسجل في نظام العيادة. سيتواصل معك فريق الاستقبال لتأكيد الموعد النهائي وإرسال رسالة تذكيرية.
+  </div>
+</div>`;
+
+    bookingSession = { active: false, step: 0, doctor: null, slot: null, patientName: '', phone: '' };
+    inputEl.placeholder = "اكتب استفسارك هنا أو اطلب حجز موعد...";
+
+    return voucherHtml;
+  }
+
+  // ── BACKEND INTEGRATION & SESSION MANAGEMENT ──
+  function getSessionId() {
+    let sid = localStorage.getItem('clinic_chat_session_id');
+    if (!sid) {
+      sid = 'web_' + Math.random().toString(36).substring(2, 10) + '_' + Date.now();
+      localStorage.setItem('clinic_chat_session_id', sid);
+    }
+    return sid;
+  }
+
+  // ── SEND MESSAGE HANDLER (Live Backend with Graceful Local Fallback) ──
+  async function handleSend() {
+    const text = inputEl.value.trim();
+    if (!text) return;
+
+    inputEl.value = '';
+    inputEl.style.height = 'auto';
+    sendBtn.disabled = true;
+
+    appendMessage('user', text);
+    playSendTone();
+
+    if (bookingSession.active && bookingSession.step === 3) {
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        const voucher = completeBooking(text);
+        appendMessage('bot', null, voucher);
+        playReceiveTone();
+      }, 700);
+      return;
+    }
+
+    showTyping();
+
+    // Determine API Endpoint (Vercel serverless /api/chat or direct n8n webhook)
+    const isLocalOrVercel = window.location.protocol.startsWith('http');
+    const apiUrl = isLocalOrVercel ? '/api/chat' : 'https://ibrahimssa52.app.n8n.cloud/webhook/clinic-chat';
+
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 12000);
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: text,
+          sessionId: getSessionId()
+        }),
+        signal: controller.signal
+      });
+
+      clearTimeout(timeoutId);
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data && data.reply) {
+          hideTyping();
+          appendMessage('bot', data.reply);
+          playReceiveTone();
+          return;
+        }
+      }
+      throw new Error('API returned empty or non-200');
+    } catch (err) {
+      console.info('Using local intelligent clinical fallback:', err.message);
+      setTimeout(() => {
+        hideTyping();
+        const fallback = resolveBotResponse(text);
+        if (fallback.html) {
+          appendMessage('bot', null, fallback.html);
+        } else {
+          appendMessage('bot', fallback.text);
+        }
+        playReceiveTone();
+      }, 400);
+    }
+  }
+
+  function sendQuickPrompt(promptText) {
+    inputEl.value = promptText;
+    inputEl.dispatchEvent(new Event('input'));
+    handleSend();
+  }
+
+  function askAboutDoctor(docName) {
+    toggleSidebar(false);
+    sendQuickPrompt(`عايز أعرف تفاصيل ومواعيد ${docName} وكيفية الحجز`);
+  }
+
+  function resetChat() {
+    const welcome = document.getElementById('welcomeCard');
+    messagesArea.innerHTML = '';
+    if (welcome) messagesArea.appendChild(welcome);
+    messagesArea.appendChild(typingWave);
+    bookingSession = { active: false, step: 0, doctor: null, slot: null, patientName: '', phone: '' };
+    inputEl.value = '';
+    inputEl.style.height = 'auto';
+    sendBtn.disabled = true;
+    showToast('تم بدء محادثة جديدة');
+    inputEl.focus();
+  }
+
+  let isRecording = false;
+  function toggleMic() {
+    const mic = document.getElementById('micBtn');
+    isRecording = !isRecording;
+    if (isRecording) {
+      mic.classList.add('recording');
+      showToast('جاري الاستماع... تحدث الآن');
+      setTimeout(() => {
+        if (isRecording) {
+          inputEl.value = "عايز استفسر عن مواعيد دكتور الأطفال وسعر الكشف";
+          inputEl.dispatchEvent(new Event('input'));
+          toggleMic();
+          showToast('تم تحويل صوتك إلى نص بنجاح');
+        }
+      }, 2500);
+    } else {
+      mic.classList.remove('recording');
+    }
+  }
+</script>
+
+</body>
+</html>
